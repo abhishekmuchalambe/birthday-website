@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Rajesh Sir</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(120deg, #001f3f, #003d79, #005fa3);
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        text-align: center;
+    }
+
+    /* MAIN TITLE */
+    h1 {
+        margin-top: 80px;
+        font-size: 2.7rem;
+        animation: fadeIn 2s ease-out;
+        text-shadow: 0 0 10px #fff, 0 0 22px #80dfff;
+    }
+
+    /* TYPEWRITER MESSAGE */
+    #typedText {
+        margin-top: 20px;
+        font-size: 1.5rem;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 4px solid white;
+        animation: typing 4s steps(40), blink .7s infinite;
+    }
+
+    @keyframes typing { from { width: 0 } to { width: 80% } }
+    @keyframes blink { 50% { border-color: transparent } }
+
+    /* FLOATING BALLOONS */
+    .balloon {
+        position: absolute;
+        width: 50px;
+        height: 60px;
+        border-radius: 50%;
+        animation: float 6s infinite ease-in-out;
+    }
+    .balloon:nth-child(1) { left: 10%; background: #ff6f91; }
+    .balloon:nth-child(2) { left: 30%; background: #ffcc00; animation-delay: 1s; }
+    .balloon:nth-child(3) { left: 50%; background: #66ffcc; animation-delay: 2s; }
+    .balloon:nth-child(4) { left: 70%; background: #80b3ff; animation-delay: 3s; }
+    .balloon:nth-child(5) { left: 85%; background: #ff9999; animation-delay: 4s; }
+
+    @keyframes float {
+        0% { bottom: -10%; opacity: 0; }
+        20% { opacity: 1; }
+        100% { bottom: 110%; opacity: 0; }
+    }
+
+    /* FLOATING STARS */
+    .star {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #fff8b3;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: starFloat linear infinite;
+    }
+
+    @keyframes starFloat {
+        from { transform: translateY(0); }
+        to { transform: translateY(-120vh); }
+    }
+
+    /* CONFETTI */
+    .confetti {
+        position: absolute;
+        width: 8px;
+        height: 12px;
+        background: white;
+        opacity: 0.8;
+        animation: confettiFall 5s infinite;
+    }
+
+    @keyframes confettiFall {
+        0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* FOOTER CREDIT */
+    .footer {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        font-size: 0.9rem;
+        color: #ffeaa7;
+        text-shadow: 0 0 10px #fff3b0;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Balloons -->
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
+
+<h1>🎉 Happy Birthday Rajesh Sir 🎉</h1>
+
+<div id="typedText">
+    Dear Sir, your guidance has shaped my journey more than words can express.
+</div>
+
+<!-- Stars -->
+<script>
+for (let i = 0; i < 40; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(star);
+}
+</script>
+
+<!-- Confetti -->
+<script>
+for (let i = 0; i < 20; i++) {
+    let c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "%";
+    c.style.backgroundColor = ["#ff7675", "#ffeaa7", "#74b9ff", "#55efc4"][Math.floor(Math.random()*4)];
+    c.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(c);
+}
+</script>
+
+<!-- FOOTER -->
+<div class="footer">
+    ✨ Created by <b>Abhishek Muchalambe</b> • Independent Project ✨
+</div>
+
+</body>
+</html>
