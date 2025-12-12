@@ -27,8 +27,8 @@
     text-align: center;
     max-width: 900px;
     line-height: 1.6;
-    margin-bottom: 50px;
-    font-family: 'Great Vibes', cursive; /* Elegant font for message */
+    margin-bottom: 30px;
+    font-family: 'Great Vibes', cursive;
     color: #2c2c2c;
   }
   .typewriter span {
@@ -36,7 +36,7 @@
     display: inline-block;
     animation: blink 0.7s infinite;
   }
-  @keyframes blink { 0%, 50%, 100% { border-color: #2c2c2c; } 25%, 75% { border-color: transparent; } }
+  @keyframes blink { 0%,50%,100% { border-color: #2c2c2c; } 25%,75% { border-color: transparent; } }
 
   /* Floating Balloons & Stars */
   .balloon, .star {
@@ -55,16 +55,30 @@
     width: 15px;
     height: 15px;
     background: yellow;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
     animation: floatStar linear infinite;
   }
-  @keyframes floatBalloon {
-    0% { transform: translateY(100vh) rotate(0deg); }
-    100% { transform: translateY(-150px) rotate(360deg); }
+  @keyframes floatBalloon { 0% { transform: translateY(100vh) rotate(0deg); } 100% { transform: translateY(-150px) rotate(360deg); } }
+  @keyframes floatStar { 0% { transform: translateY(100vh) rotate(0deg); } 100% { transform: translateY(-50px) rotate(720deg); } }
+
+  /* Projects Section */
+  #projects {
+    text-align: center;
+    max-width: 800px;
+    margin-top: 30px;
   }
-  @keyframes floatStar {
-    0% { transform: translateY(100vh) rotate(0deg); }
-    100% { transform: translateY(-50px) rotate(720deg); }
+  #projects h2 {
+    font-family:'Great Vibes', cursive;
+    font-size:2rem;
+    color:#ff6b6b;
+    margin-bottom:15px;
+  }
+  #projects ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #333;
   }
 
   /* Footer */
@@ -91,20 +105,52 @@
     transform: rotateZ(0deg);
     animation: confettiFall 3s linear forwards;
   }
-  @keyframes confettiFall {
-    0% { transform: translateY(0) rotate(0deg); opacity:1; }
-    100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
+  @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity:1; } 100% { transform: translateY(100vh) rotate(360deg); opacity:0; } }
+
+  /* Music Button */
+  #musicControl {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #ff6b6b;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 999;
   }
 </style>
 </head>
 <body>
 
+<!-- Typewriter Message -->
 <div id="message" class="typewriter"></div>
 
+<!-- Independent Projects -->
+<div id="projects">
+  <h2>Abhishek Muchalambe | Independent Projects</h2>
+  <ul>
+    <li>🚀 Smart Traffic Solutions using Python & AI</li>
+    <li>💡 GDG Pune Hackathons & AI Projects</li>
+    <li>🖥️ Personal Web Development Projects</li>
+    <li>🔧 Automation Scripts and Tools</li>
+  </ul>
+</div>
+
+<!-- Footer -->
 <footer>Created with ❤️ by Abhishek | For Rajesh Sir, Founder of ACE</footer>
 
+<!-- Background Music -->
+<audio id="birthdaySong" autoplay loop>
+  <source src="birthday_song.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<button id="musicControl">Pause Music</button>
+
 <script>
-  // Typewriter Message (Hybrid Hindi-English with Rajesh Sir)
+  // Typewriter Message
   const message = "Dear Rajesh Sir, Founder of ACE, your guidance, patience, and mentorship have truly shaped my journey in ways I can never fully express. Aapke encouragement aur support ne mujhe hamesha inspire kiya hai to reach higher and achieve more. On this special day, I wish you endless happiness, good health, aur success in every endeavor. Thank you for always believing in me and guiding me every step of the way. Happy Birthday!";
   const messageEl = document.getElementById('message');
   let i = 0;
@@ -115,7 +161,7 @@
       i++;
       setTimeout(typeWriter, 50);
     } else {
-      messageEl.innerHTML = message; // remove cursor after finish
+      messageEl.innerHTML = message;
       createConfetti();
     }
   }
@@ -155,6 +201,19 @@
       setTimeout(() => confetti.remove(), 3000);
     }
   }
+
+  // Music Control
+  const song = document.getElementById('birthdaySong');
+  const btn = document.getElementById('musicControl');
+  btn.addEventListener('click', () => {
+    if(song.paused){
+      song.play();
+      btn.innerText = "Pause Music";
+    } else {
+      song.pause();
+      btn.innerText = "Play Music";
+    }
+  });
 </script>
 
 </body>
