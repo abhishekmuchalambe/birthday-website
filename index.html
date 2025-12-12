@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -23,20 +23,23 @@
 
   /* Typewriter Message */
   #message {
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: center;
     max-width: 900px;
     line-height: 1.6;
     margin-bottom: 30px;
     font-family: 'Great Vibes', cursive;
-    color: #2c2c2c;
+    background: linear-gradient(90deg, #ff6b6b, #ffb347);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
   }
   .typewriter span {
-    border-right: 2px solid #2c2c2c;
+    border-right: 2px solid #ff6b6b;
     display: inline-block;
     animation: blink 0.7s infinite;
   }
-  @keyframes blink { 0%,50%,100% { border-color: #2c2c2c; } 25%,75% { border-color: transparent; } }
+  @keyframes blink { 0%,50%,100% { border-color: #ff6b6b; } 25%,75% { border-color: transparent; } }
 
   /* Floating Balloons & Stars */
   .balloon, .star {
@@ -50,6 +53,7 @@
     background: radial-gradient(circle at 30% 30%, #ff6b6b, #ff3d3d);
     border-radius: 50% 50% 50% 50%;
     animation: floatBalloon linear infinite;
+    cursor: pointer;
   }
   .star {
     width: 15px;
@@ -60,6 +64,17 @@
   }
   @keyframes floatBalloon { 0% { transform: translateY(100vh) rotate(0deg); } 100% { transform: translateY(-150px) rotate(360deg); } }
   @keyframes floatStar { 0% { transform: translateY(100vh) rotate(0deg); } 100% { transform: translateY(-50px) rotate(720deg); } }
+
+  /* Confetti */
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    opacity: 0.9;
+    transform: rotateZ(0deg);
+    animation: confettiFall 3s linear forwards;
+  }
+  @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity:1; } 100% { transform: translateY(100vh) rotate(360deg); opacity:0; } }
 
   /* Projects Section */
   #projects {
@@ -73,13 +88,16 @@
     color:#ff6b6b;
     margin-bottom:15px;
   }
-  #projects ul {
-    list-style-type: none;
-    padding: 0;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: #333;
+  .project-card {
+    background: rgba(255,255,255,0.8);
+    padding: 15px;
+    margin: 10px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+    max-width: 400px;
   }
+  .project-card:hover { transform: scale(1.05); }
 
   /* Footer */
   footer {
@@ -90,22 +108,11 @@
     font-size: 1.2rem;
     color: #444;
     opacity: 0;
-    animation: fadeInFooter 2s forwards 2s;
+    animation: fadeInFooter 2s forwards 2s, bounce 2s infinite alternate;
     font-family: 'Roboto', sans-serif;
   }
   @keyframes fadeInFooter { to { opacity: 1; } }
-
-  /* Confetti */
-  .confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #fce18a;
-    opacity: 0.9;
-    transform: rotateZ(0deg);
-    animation: confettiFall 3s linear forwards;
-  }
-  @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity:1; } 100% { transform: translateY(100vh) rotate(360deg); opacity:0; } }
+  @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
 
   /* Music Button */
   #musicControl {
@@ -114,9 +121,10 @@
     right: 20px;
     padding: 10px 15px;
     border: none;
-    border-radius: 8px;
+    border-radius: 50%;
     background: #ff6b6b;
     color: white;
+    font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
     z-index: 999;
@@ -130,27 +138,32 @@
 
 <!-- Independent Projects -->
 <div id="projects">
-
-  <ul>
+  <h2>Independent Projects by Abhishek</h2>
+  <div class="project-card">
+    <h3>Smart Traffic System</h3>
+    <p>Developed a system to optimize city traffic using AI and real-time data.</p>
+  </div>
+  <div class="project-card">
+    <h3>AI Chatbot Assistant</h3>
+    <p>Created an AI assistant to help students with learning and coding queries.</p>
+  </div>
 </div>
 
 <!-- Footer -->
-<footer>Created with ❤️ by Abhishek |
-
+<footer>Created with ❤️ by Abhishek | Founder of ACE</footer>
 
 <!-- Background Music -->
 <audio id="birthdaySong" autoplay loop>
   <source src="birthday_song.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
-<button id="musicControl">Pause Music</button>
+<button id="musicControl">🎵</button>
 
 <script>
   // Typewriter Message
   const message = "Dear Rajesh Sir, your guidance, patience, and mentorship have truly shaped my journey in ways I can never fully express. Aapke encouragement aur support ne mujhe hamesha inspire kiya hai to reach higher and achieve more. On this special day, I wish you endless happiness, good health, aur success in every endeavor. Thank you for always believing in me and guiding me every step of the way. Happy Birthday!";
   const messageEl = document.getElementById('message');
   let i = 0;
-
   function typeWriter() {
     if (i < message.length) {
       messageEl.innerHTML = message.substring(0, i+1) + '<span></span>';
@@ -159,6 +172,7 @@
     } else {
       messageEl.innerHTML = message;
       createConfetti();
+      setInterval(createConfetti, 2000); // Continuous confetti
     }
   }
   typeWriter();
@@ -171,6 +185,12 @@
     balloon.style.animationDuration = (5 + Math.random() * 5) + 's';
     balloon.style.width = 30 + Math.random() * 30 + 'px';
     balloon.style.height = 50 + Math.random() * 40 + 'px';
+    balloon.addEventListener('click', () => {
+      balloon.style.transform = "scale(0)";
+      balloon.style.opacity = 0;
+      let pop = new Audio('pop.mp3');
+      pop.play();
+    });
     document.body.appendChild(balloon);
   }
 
@@ -185,7 +205,7 @@
     document.body.appendChild(star);
   }
 
-  // Confetti on message complete
+  // Confetti Function
   function createConfetti() {
     for (let k = 0; k < 30; k++) {
       const confetti = document.createElement('div');
@@ -204,15 +224,13 @@
   btn.addEventListener('click', () => {
     if(song.paused){
       song.play();
-      btn.innerText = "Pause Music";
+      btn.innerText = "🎵";
     } else {
       song.pause();
-      btn.innerText = "Play Music";
+      btn.innerText = "🔇";
     }
   });
 </script>
 
 </body>
 </html>
-
-
