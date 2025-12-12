@@ -10,15 +10,18 @@
 
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+
+  /* Background Photo with overlay */
   body {
     height: 100vh;
-    background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('rajesh_sir.jpg') no-repeat center center/cover;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #333;
+    color: #fff;
+    position: relative;
   }
 
   /* Typewriter Message */
@@ -32,7 +35,7 @@
     background: linear-gradient(90deg, #ff6b6b, #ffb347);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
   }
   .typewriter span {
     border-right: 2px solid #ff6b6b;
@@ -48,9 +51,6 @@
     pointer-events: none;
   }
   .balloon {
-    width: 40px;
-    height: 60px;
-    background: radial-gradient(circle at 30% 30%, #ff6b6b, #ff3d3d);
     border-radius: 50% 50% 50% 50%;
     animation: floatBalloon linear infinite;
     cursor: pointer;
@@ -81,6 +81,7 @@
     text-align: center;
     max-width: 800px;
     margin-top: 30px;
+    z-index: 1;
   }
   #projects h2 {
     font-family:'Great Vibes', cursive;
@@ -90,6 +91,7 @@
   }
   .project-card {
     background: rgba(255,255,255,0.8);
+    color: #333;
     padding: 15px;
     margin: 10px auto;
     border-radius: 12px;
@@ -106,10 +108,11 @@
     text-align: center;
     width: 100%;
     font-size: 1.2rem;
-    color: #444;
+    color: #fff;
     opacity: 0;
     animation: fadeInFooter 2s forwards 2s, bounce 2s infinite alternate;
     font-family: 'Roboto', sans-serif;
+    z-index: 1;
   }
   @keyframes fadeInFooter { to { opacity: 1; } }
   @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
@@ -136,12 +139,21 @@
 <!-- Typewriter Message -->
 <div id="message" class="typewriter"></div>
 
-
-   
+<!-- Independent Projects -->
+<div id="projects">
+  <h2>Independent Projects by Abhishek</h2>
+  <div class="project-card">
+    <h3>Smart Traffic System</h3>
+    <p>Developed a system to optimize city traffic using AI and real-time data.</p>
+  </div>
+  <div class="project-card">
+    <h3>AI Chatbot Assistant</h3>
+    <p>Created an AI assistant to help students with learning and coding queries.</p>
+  </div>
 </div>
 
 <!-- Footer -->
-<footer>Created with ❤️ by Abhishek Muchalambe (Aceian) |</footer>
+<footer>Created with ❤️ by Abhishek | Founder of ACE</footer>
 
 <!-- Background Music -->
 <audio id="birthdaySong" autoplay loop>
@@ -176,6 +188,7 @@
     balloon.style.animationDuration = (5 + Math.random() * 5) + 's';
     balloon.style.width = 30 + Math.random() * 30 + 'px';
     balloon.style.height = 50 + Math.random() * 40 + 'px';
+    balloon.style.background = `radial-gradient(circle at 30% 30%, hsl(${Math.random()*360}, 70%, 60%), hsl(${Math.random()*360}, 70%, 50%))`;
     balloon.addEventListener('click', () => {
       balloon.style.transform = "scale(0)";
       balloon.style.opacity = 0;
@@ -225,6 +238,3 @@
 
 </body>
 </html>
-
-
-
